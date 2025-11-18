@@ -97,7 +97,7 @@
         },
         "AdAtom": {
             "id": "AdAtom",
-            "import_path": "pyiron_core.pyiron_nodes.IPAM-ECH2025.adsorbate.AdAtom",
+            "import_path": "pyiron_core.pyiron_nodes.IPAM_ECH2025.adsorbate.AdAtom",
             "label": "AdAtom",
             "parent_id": null,
             "level": 0,
@@ -107,10 +107,97 @@
             "expanded": false,
             "node": {
                 "label": "AdAtom",
-                "function": "pyiron_core.pyiron_nodes.IPAM-ECH2025.adsorbate.AdAtom",
+                "function": "pyiron_core.pyiron_nodes.IPAM_ECH2025.adsorbate.AdAtom",
                 "inputs": {
                     "element": "Na",
                     "height": 2
+                }
+            }
+        },
+        "GRACE": {
+            "id": "GRACE",
+            "import_path": "pyiron_core.pyiron_nodes.atomistic.engine.ase.GRACE",
+            "label": "GRACE",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "GRACE",
+                "function": "pyiron_core.pyiron_nodes.atomistic.engine.ase.GRACE",
+                "inputs": {}
+            }
+        },
+        "Static": {
+            "id": "Static",
+            "import_path": "pyiron_core.pyiron_nodes.atomistic.calculator.ase.Static",
+            "label": "Static",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "Static",
+                "function": "pyiron_core.pyiron_nodes.atomistic.calculator.ase.Static",
+                "inputs": {}
+            }
+        },
+        "OutputCalcStaticList": {
+            "id": "OutputCalcStaticList",
+            "import_path": "pyiron_core.pyiron_workflow.simple_workflow._return_as_out_dataclass_node.<locals>.func_dataclass",
+            "label": "OutputCalcStaticList",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "OutputCalcStaticList",
+                "function": "pyiron_core.pyiron_nodes.atomistic.calculator.data.OutputCalcStaticList",
+                "inputs": {}
+            }
+        },
+        "iterate": {
+            "id": "iterate",
+            "import_path": "pyiron_core.pyiron_nodes.controls.iterate",
+            "label": "iterate",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "iterate",
+                "function": "pyiron_core.pyiron_nodes.controls.iterate",
+                "inputs": {
+                    "node": "NotData",
+                    "input_label": "height"
+                }
+            }
+        },
+        "Linspace": {
+            "id": "Linspace",
+            "import_path": "pyiron_core.pyiron_nodes.math.Linspace",
+            "label": "Linspace",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "Linspace",
+                "function": "pyiron_core.pyiron_nodes.math.Linspace",
+                "inputs": {
+                    "x_min": 2,
+                    "x_max": 15,
+                    "num_points": 20
                 }
             }
         },
@@ -147,6 +234,30 @@
                 "target": "AdAtom",
                 "sourceHandle": "structure",
                 "targetHandle": "surface_structure"
+            },
+            {
+                "source": "AdAtom",
+                "target": "Static",
+                "sourceHandle": "structure",
+                "targetHandle": "structure"
+            },
+            {
+                "source": "GRACE",
+                "target": "Static",
+                "sourceHandle": "out",
+                "targetHandle": "engine"
+            },
+            {
+                "source": "Static",
+                "target": "OutputCalcStaticList",
+                "sourceHandle": "out",
+                "targetHandle": "dataclass"
+            },
+            {
+                "source": "Linspace",
+                "target": "iterate",
+                "sourceHandle": "linspace",
+                "targetHandle": "values"
             }
         ],
         "obj_type": "pyiron_core.pyiron_workflow.api.serial.GraphEdge"
