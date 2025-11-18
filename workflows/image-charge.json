@@ -1,0 +1,154 @@
+{
+    "label": "image-charge",
+    "nodes": {
+        "Surface": {
+            "id": "Surface",
+            "import_path": "pyiron_core.pyiron_nodes.atomistic.structure.build.Surface",
+            "label": "Surface",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "Surface",
+                "function": "pyiron_core.pyiron_nodes.atomistic.structure.build.Surface",
+                "inputs": {
+                    "element": "Pt",
+                    "size": "5 5 4",
+                    "vacuum": 20
+                }
+            }
+        },
+        "Plot3d": {
+            "id": "Plot3d",
+            "import_path": "pyiron_core.pyiron_nodes.atomistic.structure.view.Plot3d",
+            "label": "Plot3d",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "Plot3d",
+                "function": "pyiron_core.pyiron_nodes.atomistic.structure.view.Plot3d",
+                "inputs": {
+                    "distance_from_camera": 3
+                }
+            }
+        },
+        "view:top-direction": {
+            "id": "view:top-direction",
+            "import_path": "pyiron_core.pyiron_nodes.utilities.List5",
+            "label": "view:top-direction",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "view:top-direction",
+                "function": "pyiron_core.pyiron_nodes.utilities.List5",
+                "inputs": {
+                    "x1": "-10",
+                    "x2": "-2",
+                    "x3": "-1"
+                }
+            }
+        },
+        "view:up-direction": {
+            "id": "view:up-direction",
+            "import_path": "pyiron_core.pyiron_nodes.utilities.List5",
+            "label": "view:up-direction",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "view:up-direction",
+                "function": "pyiron_core.pyiron_nodes.utilities.List5",
+                "inputs": {
+                    "x1": "0",
+                    "x2": "-1",
+                    "x3": "0"
+                }
+            }
+        },
+        "viewplane": {
+            "id": "viewplane",
+            "import_path": "pyiron_core.pyiron_nodes.utilities.List5",
+            "label": "viewplane",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "viewplane",
+                "function": "pyiron_core.pyiron_nodes.utilities.List5",
+                "inputs": {}
+            }
+        },
+        "AdAtom": {
+            "id": "AdAtom",
+            "import_path": "pyiron_core.pyiron_nodes.IPAM-ECH2025.adsorbate.AdAtom",
+            "label": "AdAtom",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "AdAtom",
+                "function": "pyiron_core.pyiron_nodes.IPAM-ECH2025.adsorbate.AdAtom",
+                "inputs": {
+                    "element": "Na",
+                    "height": 2
+                }
+            }
+        },
+        "_obj_type": "pyiron_core.pyiron_workflow.api.serial.GraphNode"
+    },
+    "edges": {
+        "values": [
+            {
+                "source": "view:top-direction",
+                "target": "viewplane",
+                "sourceHandle": "list",
+                "targetHandle": "x1"
+            },
+            {
+                "source": "view:up-direction",
+                "target": "viewplane",
+                "sourceHandle": "list",
+                "targetHandle": "x2"
+            },
+            {
+                "source": "viewplane",
+                "target": "Plot3d",
+                "sourceHandle": "list",
+                "targetHandle": "view_plane"
+            },
+            {
+                "source": "AdAtom",
+                "target": "Plot3d",
+                "sourceHandle": "structure",
+                "targetHandle": "structure"
+            },
+            {
+                "source": "Surface",
+                "target": "AdAtom",
+                "sourceHandle": "structure",
+                "targetHandle": "surface_structure"
+            }
+        ],
+        "obj_type": "pyiron_core.pyiron_workflow.api.serial.GraphEdge"
+    }
+}
