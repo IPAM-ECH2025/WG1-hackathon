@@ -1,0 +1,181 @@
+{
+    "label": "fix_workflow",
+    "nodes": {
+        "LoadGraph": {
+            "id": "LoadGraph",
+            "import_path": "pyiron_core.pyiron_nodes.graphs.flow.LoadGraph",
+            "label": "LoadGraph",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "LoadGraph",
+                "function": "pyiron_core.pyiron_nodes.graphs.flow.LoadGraph",
+                "inputs": {}
+            }
+        },
+        "DisplayNodes": {
+            "id": "DisplayNodes",
+            "import_path": "pyiron_core.pyiron_nodes.graphs.flow.DisplayNodes",
+            "label": "DisplayNodes",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "DisplayNodes",
+                "function": "pyiron_core.pyiron_nodes.graphs.flow.DisplayNodes",
+                "inputs": {}
+            }
+        },
+        "DisplayNodes_1": {
+            "id": "DisplayNodes_1",
+            "import_path": "pyiron_core.pyiron_nodes.graphs.flow.DisplayNodes",
+            "label": "DisplayNodes_1",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "DisplayNodes_1",
+                "function": "pyiron_core.pyiron_nodes.graphs.flow.DisplayNodes",
+                "inputs": {}
+            }
+        },
+        "move_node_path": {
+            "id": "move_node_path",
+            "import_path": "pyiron_core.pyiron_nodes.IPAM_ECH2025.workflow_fixing.move_node_path",
+            "label": "move_node_path",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "move_node_path",
+                "function": "pyiron_core.pyiron_nodes.IPAM_ECH2025.workflow_fixing.move_node_path",
+                "inputs": {
+                    "original": "IPAM_ECH2025",
+                    "new": "ABC"
+                }
+            }
+        },
+        "merge_paths": {
+            "id": "merge_paths",
+            "import_path": "pyiron_core.pyiron_nodes.IPAM_ECH2025.workflow_fixing.merge_paths",
+            "label": "merge_paths",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "merge_paths",
+                "function": "pyiron_core.pyiron_nodes.IPAM_ECH2025.workflow_fixing.merge_paths",
+                "inputs": {
+                    "path_a": "/home/cfreysoldt/pyiron_core/WG1-hackathon/workflows/",
+                    "path_b": "image-charge2"
+                }
+            }
+        },
+        "compare_and_write_graph": {
+            "id": "compare_and_write_graph",
+            "import_path": "pyiron_core.pyiron_nodes.IPAM_ECH2025.workflow_fixing.compare_and_write_graph",
+            "label": "compare_and_write_graph",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "compare_and_write_graph",
+                "function": "pyiron_core.pyiron_nodes.IPAM_ECH2025.workflow_fixing.compare_and_write_graph",
+                "inputs": {}
+            }
+        },
+        "replace_in_graph_json": {
+            "id": "replace_in_graph_json",
+            "import_path": "pyiron_core.pyiron_nodes.IPAM_ECH2025.workflow_fixing.replace_in_graph_json",
+            "label": "replace_in_graph_json",
+            "parent_id": null,
+            "level": 0,
+            "graph": null,
+            "node_type": "node",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "replace_in_graph_json",
+                "function": "pyiron_core.pyiron_nodes.IPAM_ECH2025.workflow_fixing.replace_in_graph_json",
+                "inputs": {
+                    "old": "pyiron_core",
+                    "new": "",
+                    "dryrun": false
+                }
+            }
+        },
+        "_obj_type": "pyiron_core.pyiron_workflow.api.serial.GraphNode"
+    },
+    "edges": {
+        "values": [
+            {
+                "source": "LoadGraph",
+                "target": "DisplayNodes",
+                "sourceHandle": "graph",
+                "targetHandle": "graph"
+            },
+            {
+                "source": "LoadGraph",
+                "target": "move_node_path",
+                "sourceHandle": "graph",
+                "targetHandle": "graph"
+            },
+            {
+                "source": "move_node_path",
+                "target": "DisplayNodes_1",
+                "sourceHandle": "new_graph",
+                "targetHandle": "graph"
+            },
+            {
+                "source": "merge_paths",
+                "target": "LoadGraph",
+                "sourceHandle": "merge_paths",
+                "targetHandle": "path"
+            },
+            {
+                "source": "LoadGraph",
+                "target": "compare_and_write_graph",
+                "sourceHandle": "graph",
+                "targetHandle": "graph_a"
+            },
+            {
+                "source": "move_node_path",
+                "target": "compare_and_write_graph",
+                "sourceHandle": "new_graph",
+                "targetHandle": "graph_b"
+            },
+            {
+                "source": "merge_paths",
+                "target": "compare_and_write_graph",
+                "sourceHandle": "merge_paths",
+                "targetHandle": "path"
+            },
+            {
+                "source": "merge_paths",
+                "target": "replace_in_graph_json",
+                "sourceHandle": "merge_paths",
+                "targetHandle": "filename"
+            }
+        ],
+        "obj_type": "pyiron_core.pyiron_workflow.api.serial.GraphEdge"
+    }
+}
