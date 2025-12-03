@@ -15,7 +15,7 @@
                 "label": "IterToDataFrame",
                 "function": "pyiron_core.pyiron_nodes.controls.IterToDataFrame",
                 "inputs": {
-                    "input_label": "ContinuumModelInput__charge_posZ"
+                    "input_label": "ModelParam__charge_posZ"
                 }
             }
         },
@@ -35,112 +35,7 @@
                 "inputs": {
                     "x_min": 15,
                     "x_max": 80,
-                    "num_points": 40
-                }
-            }
-        },
-        "subgraph": {
-            "id": "subgraph",
-            "import_path": null,
-            "label": "subgraph",
-            "parent_id": null,
-            "level": 0,
-            "graph": {
-                "label": "subgraph",
-                "nodes": {
-                    "OrthorhombicCell": {
-                        "id": "OrthorhombicCell",
-                        "import_path": "pyiron_core.pyiron_nodes.IPAM_ECH2025.electrostatics2d.OrthorhombicCell",
-                        "label": "OrthorhombicCell",
-                        "parent_id": "subgraph",
-                        "level": 1,
-                        "graph": null,
-                        "node_type": "node",
-                        "widget_type": "customNode",
-                        "expanded": false,
-                        "node": {
-                            "label": "OrthorhombicCell",
-                            "function": "pyiron_core.pyiron_nodes.IPAM_ECH2025.electrostatics2d.OrthorhombicCell",
-                            "inputs": {
-                                "a1": "NotData",
-                                "a2": "NotData",
-                                "a3": "NotData"
-                            }
-                        }
-                    },
-                    "ContinuumModelInput": {
-                        "id": "ContinuumModelInput",
-                        "import_path": "pyiron_core.pyiron_nodes.IPAM_ECH2025.electrostatics2d.ContinuumModelInput",
-                        "label": "ContinuumModelInput",
-                        "parent_id": "subgraph",
-                        "level": 1,
-                        "graph": null,
-                        "node_type": "node",
-                        "widget_type": "customNode",
-                        "expanded": false,
-                        "node": {
-                            "label": "ContinuumModelInput",
-                            "function": "pyiron_core.pyiron_nodes.IPAM_ECH2025.electrostatics2d.ContinuumModelInput",
-                            "inputs": {
-                                "slab_epsilon": 1,
-                                "slab_charge": 0,
-                                "charge_posZ": 30,
-                                "charge_Q": 1.1,
-                                "dipole": 0
-                            }
-                        }
-                    },
-                    "continuum_model": {
-                        "id": "continuum_model",
-                        "import_path": "pyiron_core.pyiron_nodes.IPAM_ECH2025.electrostatics2d.continuum_model",
-                        "label": "continuum_model",
-                        "parent_id": "subgraph",
-                        "level": 1,
-                        "graph": null,
-                        "node_type": "node",
-                        "widget_type": "customNode",
-                        "expanded": false,
-                        "node": {
-                            "label": "continuum_model",
-                            "function": "pyiron_core.pyiron_nodes.IPAM_ECH2025.electrostatics2d.continuum_model",
-                            "inputs": {}
-                        }
-                    },
-                    "_obj_type": "pyiron_core.pyiron_workflow.api.serial.GraphNode"
-                },
-                "edges": {
-                    "values": [
-                        {
-                            "source": "OrthorhombicCell",
-                            "target": "ContinuumModelInput",
-                            "sourceHandle": "cell",
-                            "targetHandle": "cell"
-                        },
-                        {
-                            "source": "ContinuumModelInput",
-                            "target": "continuum_model",
-                            "sourceHandle": "dataclass",
-                            "targetHandle": "inp"
-                        }
-                    ],
-                    "obj_type": "pyiron_core.pyiron_workflow.api.serial.GraphEdge"
-                }
-            },
-            "node_type": "graph",
-            "widget_type": "customNode",
-            "expanded": false,
-            "node": {
-                "label": "subgraph",
-                "function": "pyiron_core.pyiron_workflow.api.serial.subgraph",
-                "inputs": {
-                    "OrthorhombicCell__a1": "",
-                    "OrthorhombicCell__a2": "NotData",
-                    "OrthorhombicCell__a3": "NotData",
-                    "ContinuumModelInput__slab_epsilon": 1,
-                    "ContinuumModelInput__slab_charge": 0,
-                    "ContinuumModelInput__charge_posZ": 30,
-                    "ContinuumModelInput__charge_Q": 1.1,
-                    "ContinuumModelInput__dipole": 0
+                    "num_points": 24
                 }
             }
         },
@@ -196,6 +91,120 @@
                 }
             }
         },
+        "subgraph": {
+            "id": "subgraph",
+            "import_path": null,
+            "label": "subgraph",
+            "parent_id": null,
+            "level": 0,
+            "graph": {
+                "label": "subgraph",
+                "nodes": {
+                    "Cell": {
+                        "id": "Cell",
+                        "import_path": "pyiron_core.pyiron_nodes.IPAM_ECH2025.electrostatics2d.OrthorhombicCell",
+                        "label": "Cell",
+                        "parent_id": null,
+                        "level": 0,
+                        "graph": null,
+                        "node_type": "node",
+                        "widget_type": "customNode",
+                        "expanded": false,
+                        "node": {
+                            "label": "Cell",
+                            "function": "pyiron_core.pyiron_nodes.IPAM_ECH2025.electrostatics2d.OrthorhombicCell",
+                            "inputs": {
+                                "a1": "NotData",
+                                "a2": "NotData",
+                                "a3": "NotData"
+                            }
+                        }
+                    },
+                    "ModelParam": {
+                        "id": "ModelParam",
+                        "import_path": "pyiron_core.pyiron_nodes.IPAM_ECH2025.electrostatics2d.ContinuumModelInput",
+                        "label": "ModelParam",
+                        "parent_id": null,
+                        "level": 0,
+                        "graph": null,
+                        "node_type": "node",
+                        "widget_type": "customNode",
+                        "expanded": false,
+                        "node": {
+                            "label": "ModelParam",
+                            "function": "pyiron_core.pyiron_nodes.IPAM_ECH2025.electrostatics2d.ContinuumModelInput",
+                            "inputs": {
+                                "slab_thickness": 10,
+                                "slab_epsilon": 1,
+                                "slab_charge": 0,
+                                "charge_posZ": 20,
+                                "charge_Q": 1,
+                                "dipole": 0,
+                                "dipole_z1": -5,
+                                "dipole_z2": ""
+                            }
+                        }
+                    },
+                    "continuum_model": {
+                        "id": "continuum_model",
+                        "import_path": "pyiron_core.pyiron_nodes.IPAM_ECH2025.electrostatics2d.continuum_model",
+                        "label": "continuum_model",
+                        "parent_id": null,
+                        "level": 0,
+                        "graph": null,
+                        "node_type": "node",
+                        "widget_type": "customNode",
+                        "expanded": false,
+                        "node": {
+                            "label": "continuum_model",
+                            "function": "pyiron_core.pyiron_nodes.IPAM_ECH2025.electrostatics2d.continuum_model",
+                            "inputs": {
+                                "ecut": 20
+                            }
+                        }
+                    },
+                    "_obj_type": "pyiron_core.pyiron_workflow.api.serial.GraphNode"
+                },
+                "edges": {
+                    "values": [
+                        {
+                            "source": "ModelParam",
+                            "target": "continuum_model",
+                            "sourceHandle": "dataclass",
+                            "targetHandle": "inp"
+                        },
+                        {
+                            "source": "Cell",
+                            "target": "ModelParam",
+                            "sourceHandle": "cell",
+                            "targetHandle": "cell"
+                        }
+                    ],
+                    "obj_type": "pyiron_core.pyiron_workflow.api.serial.GraphEdge"
+                }
+            },
+            "node_type": "graph",
+            "widget_type": "customNode",
+            "expanded": false,
+            "node": {
+                "label": "subgraph",
+                "function": "pyiron_core.pyiron_workflow.api.serial.subgraph",
+                "inputs": {
+                    "Cell__a1": 20,
+                    "Cell__a2": 20,
+                    "Cell__a3": 100,
+                    "ModelParam__slab_thickness": 10,
+                    "ModelParam__slab_epsilon": 1,
+                    "ModelParam__slab_charge": 0.2,
+                    "ModelParam__charge_posZ": 20,
+                    "ModelParam__charge_Q": 1,
+                    "ModelParam__dipole": 0,
+                    "ModelParam__dipole_z1": -5,
+                    "ModelParam__dipole_z2": -10,
+                    "continuum_model__ecut": 20
+                }
+            }
+        },
         "_obj_type": "pyiron_core.pyiron_workflow.api.serial.GraphNode"
     },
     "edges": {
@@ -205,12 +214,6 @@
                 "target": "IterToDataFrame",
                 "sourceHandle": "linspace",
                 "targetHandle": "values"
-            },
-            {
-                "source": "subgraph",
-                "target": "IterToDataFrame",
-                "sourceHandle": "self",
-                "targetHandle": "node"
             },
             {
                 "source": "IterToDataFrame",
@@ -235,6 +238,12 @@
                 "target": "IterToDataFrame",
                 "sourceHandle": "Executor",
                 "targetHandle": "executor"
+            },
+            {
+                "source": "subgraph",
+                "target": "IterToDataFrame",
+                "sourceHandle": "self",
+                "targetHandle": "node"
             }
         ],
         "obj_type": "pyiron_core.pyiron_workflow.api.serial.GraphEdge"
